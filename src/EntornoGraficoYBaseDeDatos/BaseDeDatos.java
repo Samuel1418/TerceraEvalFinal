@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 public class BaseDeDatos {
 
      public static class Inserts{
-     public static void insert(String NombreUser, String NombrePartida,String Resultado,int Farmeo,int Kills,int Asesinatos,int Muertes,int Vision,String Rango,int Elo) {
-        String sql = "INSERT INTO "+NombreUser+"(NombreUSer,NombrePartida,Resultado,Farmeo,Kills,Asesinatos,Muertes,vision,elo) VALUES(?,?,?,?,?,?,?,?,?,?)";
+     public static void insert(String NombreUser, String NombrePartida,String Resultado,int Farmeo,int Kills,int Muertes,int Asistencias,int Vision,String Rango,int Elo) {
+        String sql = "INSERT INTO "+NombreUser+"(NombrePartida,NombreUser,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo) VALUES(?,?,?,?,?,?,?,?,?,?)";
         Connection conne = null;
         try {
             conne = DriverManager.getConnection("jdbc:sqlite:base.db");
@@ -29,20 +29,19 @@ public class BaseDeDatos {
         }
         try (Connection conn = conne;
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, NombreUser);
-            pstmt.setString(2, NombrePartida);
+            pstmt.setString(1, NombrePartida);
+            pstmt.setString(2, NombreUser);
             pstmt.setString(3, Resultado);
             pstmt.setInt(4, Farmeo);
             pstmt.setInt(5, Kills);
-            pstmt.setInt(6, Asesinatos);
-            pstmt.setInt(7, Muertes);
+            pstmt.setInt(6, Muertes);
+            pstmt.setInt(7, Asistencias);
             pstmt.setInt(8, Vision);
             pstmt.setString(9, Rango);
             pstmt.setInt(10, Elo);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("No se puede repetir la clave primaria!");
-            JOptionPane.showMessageDialog(null,"No se puede repetir la clave primaria!");
+            System.out.println(e.getMessage());
         }
         }
      
@@ -65,32 +64,31 @@ public class BaseDeDatos {
             pstmt.setString(7, NombreObjeto6);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("No se puede repetir la clave primaria!");
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null,"No se puede repetir la clave primaria!");
         }
         }
 
-     public static void createNewTable() {
-        // SQLite connection string
+     public static void createNewTable(String user) {
         String url = "jdbc:sqlite:base.db";
-        
-        // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS Partida (\n"
-                + "	NombreUser text NOT NULL,\n"
-                + "	NombrePartida NOT NULL text PRIMARY KEY,\n"
+        String sql = "CREATE TABLE IF NOT EXISTS "+user+" (\n"
+                + "	NombrePartida text NOT NULL PRIMARY KEY,\n"
+                + "	NombreUser text,\n"
                 + "	Resultado text,\n"
                 + "	Farmeo integer,\n"
                 + "	Kills integer,\n"
-                + "	Asesinatos integer,\n"
                 + "	Muertes integer,\n"
+                + "	Asistencias integer,\n"
                 + "	Vision integer,\n"
                 + "	Rango text,\n"
-                + "	Elo integer\n"
+                + "	Elo real\n"
                 + ");";
-        
+
         try (Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement()) {
+                Statement stmt = conn.createStatement()) {
+            // create a new table
             stmt.execute(sql);
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

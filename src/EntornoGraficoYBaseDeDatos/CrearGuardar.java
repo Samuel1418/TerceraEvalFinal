@@ -261,9 +261,10 @@ public class CrearGuardar extends javax.swing.JFrame {
 
     private void BotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGuardarActionPerformed
         Panel obx=new Panel();
-        BaseDeDatos.Inserts.createNewTable();
         int farm=Integer.parseInt(Farmeo.getText()), kill=Integer.parseInt(Kills.getText()),muert= Integer.parseInt(Muertes.getText()),asist= Integer.parseInt(Asistencias.getText()),visi=Integer.parseInt(Vision.getText()),el=Integer.parseInt(Elo.getText());
-        BaseDeDatos.Inserts.insert(obx.usuario, NombrePartida.getText(), Resultado.getText(), farm,kill,muert,asist,visi, Rango.getText(), el);
+        String usu=obx.usuario,npart=NombrePartida.getText(),result=Resultado.getText(),rang=Rango.getText();
+        BaseDeDatos.Inserts.createNewTable(usu);
+        BaseDeDatos.Inserts.insert(usu, npart, result, farm,kill,muert,asist,visi, rang, el);
         this.setVisible(false);
     }//GEN-LAST:event_BotonGuardarActionPerformed
 
