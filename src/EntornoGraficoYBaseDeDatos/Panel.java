@@ -6,7 +6,7 @@
 package EntornoGraficoYBaseDeDatos;
 
 import javax.swing.JOptionPane;
-
+import Imagen.Imagen;
 /**
  *
  * @author cromerofajar
@@ -19,8 +19,14 @@ public class Panel extends javax.swing.JFrame {
      */
     public Panel() {
         initComponents();
+        
+        Imagen Imagen = new Imagen();
+            jPanel2.add(Imagen);
+            jPanel2.repaint();
+            
+        SonidoFondo obx = new SonidoFondo();
+            obx.start();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,16 +47,12 @@ public class Panel extends javax.swing.JFrame {
         BorrarBuild = new javax.swing.JButton();
         BorrarPartida = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
-        Crear = new javax.swing.JButton();
         NombreUsuario = new javax.swing.JTextField();
         NombreUsuarioTexto = new javax.swing.JLabel();
         ConODescon = new javax.swing.JButton();
         CrearBuild = new javax.swing.JButton();
         ConsultarBuild = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaPartida = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TablaBuild = new javax.swing.JTable();
+        ModificarBuild = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,13 +68,22 @@ public class Panel extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mi Almacen");
+        setResizable(false);
 
+        Bienvenido.setForeground(new java.awt.Color(255, 255, 255));
         Bienvenido.setText("Desconectado");
 
+        Pregunta.setForeground(new java.awt.Color(255, 255, 255));
         Pregunta.setText("Que accion desea realizar?");
 
         Revisar.setText("Revisar partidas guardadas");
         Revisar.setEnabled(false);
+        Revisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RevisarActionPerformed(evt);
+            }
+        });
 
         Guardar.setText("Guardar una partida");
         Guardar.setEnabled(false);
@@ -84,16 +95,24 @@ public class Panel extends javax.swing.JFrame {
 
         BorrarBuild.setText("Borrar una build");
         BorrarBuild.setEnabled(false);
+        BorrarBuild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarBuildActionPerformed(evt);
+            }
+        });
 
         BorrarPartida.setText("Borrar una partida concreta");
         BorrarPartida.setEnabled(false);
+        BorrarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarPartidaActionPerformed(evt);
+            }
+        });
 
         Modificar.setText("Modificar los datos de una partida");
         Modificar.setEnabled(false);
 
-        Crear.setText("Crear una partida de prueba");
-        Crear.setEnabled(false);
-
+        NombreUsuarioTexto.setForeground(new java.awt.Color(255, 255, 255));
         NombreUsuarioTexto.setText("Nombre de usuario");
 
         ConODescon.setText("Conectar");
@@ -105,32 +124,22 @@ public class Panel extends javax.swing.JFrame {
 
         CrearBuild.setText("Crear una build");
         CrearBuild.setEnabled(false);
+        CrearBuild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearBuildActionPerformed(evt);
+            }
+        });
 
         ConsultarBuild.setText("Revisar build");
         ConsultarBuild.setEnabled(false);
-
-        TablaPartida.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre Partida", "Resultado", "Farmeo", "Kills", "Muertes", "Asistencias", "Vision", "Rango", "Elo"
+        ConsultarBuild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarBuildActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(TablaPartida);
+        });
 
-        TablaBuild.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre Build", "1º Objeto", "2º Objeto", "3º Objeto", "4º Objeto", "5º Objeto", "6º Objeto"
-            }
-        ));
-        jScrollPane3.setViewportView(TablaBuild);
-        if (TablaBuild.getColumnModel().getColumnCount() > 0) {
-            TablaBuild.getColumnModel().getColumn(0).setResizable(false);
-        }
+        ModificarBuild.setText("Modificar los datos de una build");
+        ModificarBuild.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,39 +147,34 @@ public class Panel extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Revisar)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ConODescon))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Bienvenido)
+                                .addComponent(NombreUsuarioTexto)
+                                .addComponent(Pregunta))
+                            .addGap(87, 87, 87)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(Guardar)
+                        .addGap(117, 117, 117)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CrearBuild)
+                            .addComponent(ConsultarBuild)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Revisar)
-                                    .addComponent(ConsultarBuild))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Modificar)
-                                    .addComponent(Guardar)))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ConODescon))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Bienvenido)
-                                        .addComponent(NombreUsuarioTexto)
-                                        .addComponent(Pregunta))
-                                    .addGap(87, 87, 87))))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Crear)
-                            .addComponent(CrearBuild))
+                            .addComponent(Modificar)
+                            .addComponent(BorrarPartida))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BorrarBuild)
-                            .addComponent(BorrarPartida)))
-                    .addComponent(jScrollPane3))
-                .addGap(0, 26, Short.MAX_VALUE))
+                            .addComponent(ModificarBuild))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,19 +192,19 @@ public class Panel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Revisar)
-                    .addComponent(Crear)
-                    .addComponent(Modificar)
-                    .addComponent(BorrarPartida))
-                .addGap(18, 18, 18)
+                    .addComponent(ConsultarBuild))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CrearBuild)
                     .addComponent(Guardar)
-                    .addComponent(ConsultarBuild)
+                    .addComponent(CrearBuild))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BorrarPartida)
                     .addComponent(BorrarBuild))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modificar)
+                    .addComponent(ModificarBuild))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -214,22 +218,29 @@ public class Panel extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CrearBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBuildActionPerformed
+        CrearBuild obx=new CrearBuild();
+        obx.setVisible(true);
+    }//GEN-LAST:event_CrearBuildActionPerformed
 
     private void ConODesconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConODesconActionPerformed
         if(conectado=="NO"&&NombreUsuario.getText().isEmpty()){
@@ -245,7 +256,7 @@ public class Panel extends javax.swing.JFrame {
             BorrarBuild.setEnabled(false);
             BorrarPartida.setEnabled(false);
             Modificar.setEnabled(false);
-            Crear.setEnabled(false);
+            ModificarBuild.setEnabled(false);
             CrearBuild.setEnabled(false);
             conectado="NO";
         }else if(conectado=="NO"){
@@ -259,7 +270,7 @@ public class Panel extends javax.swing.JFrame {
             BorrarBuild.setEnabled(true);
             BorrarPartida.setEnabled(true);
             Modificar.setEnabled(true);
-            Crear.setEnabled(true);
+            ModificarBuild.setEnabled(true);
             CrearBuild.setEnabled(true);
             NombreUsuario.setText("");
             conectado="SI";
@@ -269,10 +280,26 @@ public class Panel extends javax.swing.JFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         CrearGuardar obx=new CrearGuardar();
         obx.setVisible(true);
-        
-        
-        
+
     }//GEN-LAST:event_GuardarActionPerformed
+
+    private void RevisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RevisarActionPerformed
+        RevisarPartidas obx=new RevisarPartidas();
+        obx.setVisible(true);
+    }//GEN-LAST:event_RevisarActionPerformed
+
+    private void ConsultarBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarBuildActionPerformed
+        RevisarBuilds obx=new RevisarBuilds();
+        obx.setVisible(true);
+    }//GEN-LAST:event_ConsultarBuildActionPerformed
+
+    private void BorrarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarPartidaActionPerformed
+        BaseDeDatos.Borrar.borrar();
+    }//GEN-LAST:event_BorrarPartidaActionPerformed
+
+    private void BorrarBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarBuildActionPerformed
+        BaseDeDatos.Borrar.borrarB();
+    }//GEN-LAST:event_BorrarBuildActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,21 +342,18 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JButton BorrarPartida;
     private javax.swing.JButton ConODescon;
     private javax.swing.JButton ConsultarBuild;
-    private javax.swing.JButton Crear;
     private javax.swing.JButton CrearBuild;
     private javax.swing.JButton Guardar;
     private javax.swing.JButton Modificar;
+    private javax.swing.JButton ModificarBuild;
     private javax.swing.JTextField NombreUsuario;
     private javax.swing.JLabel NombreUsuarioTexto;
     private javax.swing.JLabel Pregunta;
     private javax.swing.JButton Revisar;
-    private javax.swing.JTable TablaBuild;
-    private javax.swing.JTable TablaPartida;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
 }

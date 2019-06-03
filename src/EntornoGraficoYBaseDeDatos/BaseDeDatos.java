@@ -8,9 +8,14 @@ package EntornoGraficoYBaseDeDatos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -46,7 +51,7 @@ public class BaseDeDatos {
         }
      
      public static void insert2(String NombreUser,String NombreBuild,String NombreObjeto, String NombreObjeto2,String NombreObjeto3,String NombreObjeto4,String NombreObjeto5,String NombreObjeto6) {
-        String sql = "INSERT INTO "+NombreUser+"Build (NombreBuild,NombreObjeto,NombreObjeto2,NombreObjeto3,NombreObjeto4,NombreObjeto5,NombreObjeto6) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO "+NombreUser+"Build (NombreBuild,NombreObjeto,NombreObjeto2,NombreObjeto3,NombreObjeto4,NombreObjeto5,NombreObjeto6) VALUES(?,?,?,?,?,?,?)";
         Connection conne = null;
         try {
             conne = DriverManager.getConnection("jdbc:sqlite:base.db");
@@ -94,19 +99,19 @@ public class BaseDeDatos {
         }
     }
     
-    public static void createNewTable2() {
+    public static void createNewTable2(String user) {
         // SQLite connection string
         String url = "jdbc:sqlite:base.db";
         
         // SQL statement for creating a new table
-        String sql1 = "CREATE TABLE IF NOT EXISTS Build (\n"
+        String sql1 = "CREATE TABLE IF NOT EXISTS "+user+"build (\n"
                 + "	NombreBuild text PRIMARY KEY,\n"
                 + "	NombreObjeto text,\n"
                 + "	NombreObjeto2 text,\n"
                 + "	NombreObjeto3 text,\n"
                 + "	NombreObjeto4 text,\n"
                 + "	NombreObjeto5 text,\n"
-                + "	NombreObjeto6 text,\n"
+                + "	NombreObjeto6 text\n"
                 + ");";
         
         try (Connection connn = DriverManager.getConnection(url);
@@ -114,6 +119,391 @@ public class BaseDeDatos {
             stmt.execute(sql1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+     }
+     public static class Select{
+        public static DefaultTableModel blanco(){
+        RevisarPartidas obx=new RevisarPartidas();
+        DefaultTableModel blancos=(DefaultTableModel) obx.TablaDatosParti.getModel();
+        blancos.setRowCount(0);
+        return blancos;
+    }
+        public static DefaultTableModel blanco2(){
+        RevisarBuilds obx=new RevisarBuilds();
+        DefaultTableModel blancos=(DefaultTableModel) obx.TablaDatosBuild.getModel();
+        blancos.setRowCount(0);
+        return blancos;
+    }
+        public static ArrayList<Object[]> selectAll(String nombre){
+        ArrayList <Object[]>parti=new ArrayList<>();
+
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sql = "SELECT NombrePartida,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo FROM \""+nombre+"\"";
+
+        
+        try (Connection conn=conne;
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                Object[] base=new Object[9];
+                base[0]=rs.getString("NombrePartida");
+                base[1]=rs.getString("Resultado");
+                base[2]=rs.getString("Farmeo");
+                base[3]=rs.getString("Kills");
+                base[4]=rs.getString("Muertes");
+                base[5]=rs.getString("Asistencias");
+                base[6]=rs.getString("Rango");
+                base[7]=rs.getString("Vision");
+                base[8]=rs.getString("Elo");
+                parti.add(base);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+        return parti;
+    }
+    public static ArrayList<Object[]> selectNombre(String nombre,String nPartida){
+        ArrayList <Object[]>parti=new ArrayList<>();
+
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sql = "SELECT NombrePartida,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo FROM \""+nombre+"\" WHERE NombrePartida=\""+nPartida+"\"";
+
+        
+        try (Connection conn=conne;
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                Object[] base=new Object[9];
+                base[0]=rs.getString("NombrePartida");
+                base[1]=rs.getString("Resultado");
+                base[2]=rs.getString("Farmeo");
+                base[3]=rs.getString("Kills");
+                base[4]=rs.getString("Muertes");
+                base[5]=rs.getString("Asistencias");
+                base[6]=rs.getString("Rango");
+                base[7]=rs.getString("Vision");
+                base[8]=rs.getString("Elo");
+                parti.add(base);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+        return parti;
+    }
+        public static ArrayList<Object[]> selectResultado(String nombre,String resultado){
+        ArrayList <Object[]>parti=new ArrayList<>();
+
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sql = "SELECT NombrePartida,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo FROM \""+nombre+"\" WHERE Resultado=\""+resultado+"\"";
+
+        
+        try (Connection conn=conne;
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                Object[] base=new Object[9];
+                base[0]=rs.getString("NombrePartida");
+                base[1]=rs.getString("Resultado");
+                base[2]=rs.getString("Farmeo");
+                base[3]=rs.getString("Kills");
+                base[4]=rs.getString("Muertes");
+                base[5]=rs.getString("Asistencias");
+                base[6]=rs.getString("Rango");
+                base[7]=rs.getString("Vision");
+                base[8]=rs.getString("Elo");
+                parti.add(base);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+        return parti;
+    }
+            public static ArrayList<Object[]> selectRango(String nombre,String rango){
+        ArrayList <Object[]>parti=new ArrayList<>();
+
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sql = "SELECT NombrePartida,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo FROM \""+nombre+"\" WHERE Rango=\""+rango+"\"";
+
+        
+        try (Connection conn=conne;
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                Object[] base=new Object[9];
+                base[0]=rs.getString("NombrePartida");
+                base[1]=rs.getString("Resultado");
+                base[2]=rs.getString("Farmeo");
+                base[3]=rs.getString("Kills");
+                base[4]=rs.getString("Muertes");
+                base[5]=rs.getString("Asistencias");
+                base[6]=rs.getString("Rango");
+                base[7]=rs.getString("Vision");
+                base[8]=rs.getString("Elo");
+                parti.add(base);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+        return parti;
+    }
+    public static ArrayList<Object[]> selectAllB(String nombre){
+        ArrayList <Object[]>parti=new ArrayList<>();
+
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sql = "SELECT NombreBuild,NombreObjeto,NombreObjeto2,NombreObjeto3,NombreObjeto4,NombreObjeto5,NombreObjeto6 FROM \""+nombre+"Build\"";
+
+        
+        try (Connection conn=conne;
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                Object[] base=new Object[7];
+                base[0]=rs.getString("NombreBuild");
+                base[1]=rs.getString("NombreObjeto");
+                base[2]=rs.getString("NombreObjeto2");
+                base[3]=rs.getString("NombreObjeto3");
+                base[4]=rs.getString("NombreObjeto4");
+                base[5]=rs.getString("NombreObjeto5");
+                base[6]=rs.getString("NombreObjeto6");
+                parti.add(base);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+        return parti;
+    }
+        public static ArrayList<Object[]> selectNombreB(String nombre,String nBuild){
+        ArrayList <Object[]>parti=new ArrayList<>();
+
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sql = "SELECT NombreBuild,NombreObjeto,NombreObjeto2,NombreObjeto3,NombreObjeto4,NombreObjeto5,NombreObjeto6 FROM \""+nombre+"build\" WHERE NombreBuild=\""+nBuild+"\"";
+
+        
+        try (Connection conn=conne;
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                Object[] base=new Object[7];
+                base[0]=rs.getString("NombreBuild");
+                base[1]=rs.getString("NombreObjeto");
+                base[2]=rs.getString("NombreObjeto2");
+                base[3]=rs.getString("NombreObjeto3");
+                base[4]=rs.getString("NombreObjeto4");
+                base[5]=rs.getString("NombreObjeto5");
+                base[6]=rs.getString("NombreObjeto6");
+                parti.add(base);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+        return parti;
+    }
+    }
+     public static class Borrar{
+     public static void borrar(){
+        Panel obx=new Panel();
+        String user=obx.usuario;
+        String nombre=JOptionPane.showInputDialog(null,"Introduce el nombre de la partida que deseas borrar");
+        String url= "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        String sql="DELETE FROM "+user+" WHERE NombrePartida= ?";
+        try (Connection conn = conne;
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombre);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Datos partida borrados");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            
+        }finally{
+            try {
+                conne.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+    }
+     public static void borrarB(){
+        Panel obx=new Panel();
+        String user=obx.usuario;
+        String nombre=JOptionPane.showInputDialog(null,"Introduce el nombre de la build que deseas borrar");
+        String url= "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        String sql="DELETE FROM "+user+"Build WHERE NombreBuild= ?";
+        try (Connection conn = conne;
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombre);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Datos build borrados");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            
+        }finally{
+            try {
+                conne.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
+        }
+    }
+     }
+     public static class Modificar{
+     public static void modificarDatosPartida(){
+        Panel obx=new Panel();
+        String use=obx.usuario;
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        /*
+        * Variables used to realiced the update
+        */
+            String nPartida=JOptionPane.showInputDialog(null,"Introduce el nombre de la partida a buscar");
+            String jug=JOptionPane.showInputDialog(null,"Introduzca el nombre del mejor jugador");
+            String camp=JOptionPane.showInputDialog(null,"Introduzca el nombre del campeon usado");
+            String sql = "UPDATE \""+use+"\" SET NombrePartida= ? ,"
+            + "mvp = ? , "
+            + "usado = ?"
+            + "WHERE ano = ";
+            sql=sql+nPartida;
+ 
+        try (Connection conn = conne;
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, ano);
+            pstmt.setString(2, jug);
+            pstmt.setString(3,camp);
+
+            pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally{
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
      }
