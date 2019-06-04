@@ -22,7 +22,7 @@ public class SonidoFondo extends Thread {
         while (estado) {
             try {
                 sonido = AudioSystem.getClip();
-                File a = new File("C:\\Users\\Samuel\\Downloads\\123.wav");//pc clase
+                File a = new File("/home/local/DANIELCASTELAO/cromerofajar/NetBeansProjects/proyectoTrime3/123.wav");//pc clase
                 sonido.open(AudioSystem.getAudioInputStream(a));
                 sonido.start();
                 Thread.sleep(25500); // (30segundos)

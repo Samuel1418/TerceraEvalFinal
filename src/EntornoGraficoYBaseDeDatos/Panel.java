@@ -24,8 +24,8 @@ public class Panel extends javax.swing.JFrame {
             jPanel2.add(Imagen);
             jPanel2.repaint();
             
-        SonidoFondo obx = new SonidoFondo();
-            obx.start();
+//        SonidoFondo obx = new SonidoFondo();
+//        obx.start();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +111,11 @@ public class Panel extends javax.swing.JFrame {
 
         Modificar.setText("Modificar los datos de una partida");
         Modificar.setEnabled(false);
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
 
         NombreUsuarioTexto.setForeground(new java.awt.Color(255, 255, 255));
         NombreUsuarioTexto.setText("Nombre de usuario");
@@ -140,6 +145,11 @@ public class Panel extends javax.swing.JFrame {
 
         ModificarBuild.setText("Modificar los datos de una build");
         ModificarBuild.setEnabled(false);
+        ModificarBuild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarBuildActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -300,6 +310,16 @@ public class Panel extends javax.swing.JFrame {
     private void BorrarBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarBuildActionPerformed
         BaseDeDatos.Borrar.borrarB();
     }//GEN-LAST:event_BorrarBuildActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        ModificarPartida obx=new ModificarPartida();
+        obx.setVisible(true);
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void ModificarBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBuildActionPerformed
+        ModificarBuilds obx =new ModificarBuilds();
+        obx.setVisible(true);
+    }//GEN-LAST:event_ModificarBuildActionPerformed
 
     /**
      * @param args the command line arguments

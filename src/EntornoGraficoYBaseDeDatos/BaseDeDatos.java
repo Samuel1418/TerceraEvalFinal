@@ -465,8 +465,9 @@ public class BaseDeDatos {
     }
      }
      public static class Modificar{
-     public static void modificarDatosPartida(){
+     public static void modificarDatosPartida(String nPartida,String resultado,int farmeo,int kills,int muertes,int asistencias,int vision,String rango,int elo){
         Panel obx=new Panel();
+
         String use=obx.usuario;
         String url = "jdbc:sqlite:base.db";
         Connection conne = null;
@@ -478,33 +479,91 @@ public class BaseDeDatos {
         /*
         * Variables used to realiced the update
         */
-            String nPartida=JOptionPane.showInputDialog(null,"Introduce el nombre de la partida a buscar");
-            String jug=JOptionPane.showInputDialog(null,"Introduzca el nombre del mejor jugador");
-            String camp=JOptionPane.showInputDialog(null,"Introduzca el nombre del campeon usado");
-            String sql = "UPDATE \""+use+"\" SET NombrePartida= ? ,"
-            + "mvp = ? , "
-            + "usado = ?"
-            + "WHERE ano = ";
-            sql=sql+nPartida;
- 
+            String sql = "UPDATE \""+use+"\" SET NombrePartida= ? , "
+            + "NombreUser = ? , "
+            + "Resultado = ? , "
+            + "Farmeo = ? , "
+            + "Kills = ? , "
+            + "Muertes = ? , "
+            + "Asistencias = ? , "
+            + "Vision = ? , "
+            + "Rango = ? , "
+            + "Elo = ? "
+            + "WHERE NombrePartida = \""+nPartida+"\"";
         try (Connection conn = conne;
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, ano);
-            pstmt.setString(2, jug);
-            pstmt.setString(3,camp);
-
+            pstmt.setString(1, nPartida);
+            pstmt.setString(2, use);
+            pstmt.setString(3, resultado);
+            pstmt.setInt(4, farmeo);
+            pstmt.setInt(5, kills);
+            pstmt.setInt(6, muertes);
+            pstmt.setInt(7, asistencias);
+            pstmt.setInt(8, vision);
+            pstmt.setString(9,rango);
+            pstmt.setInt(10, elo);
             pstmt.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+
         }finally{
             try {
                 conne.close();
+
             } catch (SQLException ex) {
                 Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
+     public static void modificarDatosBuild(String nBuild,String obj1,String obj2,String obj3, String obj4, String obj5, String obj6){
+        Panel obx=new Panel();
+
+        String use=obx.usuario;
+        String url = "jdbc:sqlite:base.db";
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        /*
+        * Variables used to realiced the update
+        */
+            String sql = "UPDATE \""+use+"build\" SET NombreBuild= ? , "
+            + "NombreObjeto = ? , "
+            + "NombreObjeto2 = ? , "
+            + "NombreObjeto3 = ? , "
+            + "NombreObjeto4 = ? , "
+            + "NombreObjeto5 = ? , "
+            + "NombreObjeto6 = ?  "
+            + "WHERE NombreBuild = \""+nBuild+"\"";
+        try (Connection conn = conne;
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nBuild);
+            pstmt.setString(2, obj1);
+            pstmt.setString(3, obj2);
+            pstmt.setString(4, obj3);
+            pstmt.setString(5, obj4);
+            pstmt.setString(6, obj5);
+            pstmt.setString(7, obj6);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }finally{
+            try {
+                conne.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+     }
      }
 }
