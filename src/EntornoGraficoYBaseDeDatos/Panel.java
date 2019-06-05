@@ -16,7 +16,7 @@ public class Panel extends javax.swing.JFrame {
     public static String usuario;
     String conectado="NO";
     SonidoFondo music = new SonidoFondo();
-    String musica="SI";
+    String musica="NO";
     /**
      * Creates new form Panel
      */
@@ -28,7 +28,7 @@ public class Panel extends javax.swing.JFrame {
             jPanel2.repaint();
             
         
-        music.start();
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,7 +156,7 @@ public class Panel extends javax.swing.JFrame {
             }
         });
 
-        Mute.setText("Silenciar");
+        Mute.setText("Iniciar");
         Mute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MuteActionPerformed(evt);
