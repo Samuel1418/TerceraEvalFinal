@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import excepciones.Excepcion;
 /**
  *
  * @author cromerofajar
@@ -69,7 +69,7 @@ public class BaseDeDatos {
             pstmt.setString(7, NombreObjeto6);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            
             JOptionPane.showMessageDialog(null,"No se puede repetir la clave primaria!");
         }
         }

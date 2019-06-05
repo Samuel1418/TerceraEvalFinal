@@ -7,6 +7,7 @@ package EntornoGraficoYBaseDeDatos;
 
 import javax.swing.JOptionPane;
 import Imagen.Imagen;
+import excepciones.Excepcion;
 /**
  *
  * @author cromerofajar
@@ -254,7 +255,8 @@ public class Panel extends javax.swing.JFrame {
 
     private void ConODesconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConODesconActionPerformed
         if(conectado=="NO"&&NombreUsuario.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Introduzca un nombre de usuario");
+            Excepcion obx=new Excepcion();
+            obx.Excepcion("Introduzca un usuario");
         }else if(conectado=="SI"){
             NombreUsuario.setEditable(true);
             ConODescon.setText("Conectar");
