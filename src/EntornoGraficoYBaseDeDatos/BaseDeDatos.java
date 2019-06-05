@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import excepciones.Excepcion;
+import utilidades.PedirDatos;
 /**
  *
  * @author cromerofajar
@@ -406,7 +406,7 @@ public class BaseDeDatos {
      public static void borrar(){
         Panel obx=new Panel();
         String user=obx.usuario;
-        String nombre=JOptionPane.showInputDialog(null,"Introduce el nombre de la partida que deseas borrar");
+        String nombre=PedirDatos.texto("Introduce el nombre de la partida que deseas borrar");
         String url= "jdbc:sqlite:base.db";
         Connection conne = null;
         try {
@@ -436,7 +436,7 @@ public class BaseDeDatos {
      public static void borrarB(){
         Panel obx=new Panel();
         String user=obx.usuario;
-        String nombre=JOptionPane.showInputDialog(null,"Introduce el nombre de la build que deseas borrar");
+        String nombre=PedirDatos.texto("Introduce el nombre de la build que deseas borrar");
         String url= "jdbc:sqlite:base.db";
         Connection conne = null;
         try {
