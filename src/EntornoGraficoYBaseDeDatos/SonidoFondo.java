@@ -25,12 +25,17 @@ public class SonidoFondo extends Thread {
                 File a = new File("/home/local/DANIELCASTELAO/cromerofajar/NetBeansProjects/proyectoTrime3/123.wav");//pc clase
                 sonido.open(AudioSystem.getAudioInputStream(a));
                 sonido.start();
-                Thread.sleep(25500); // (30segundos)
+                Thread.sleep(51000); // (60segundos)
                 sonido.close();
             } catch (Exception tipoError) {
                 System.out.println("" + tipoError);
             }
         }
+        
 }
+    public void Mute() {
+        estado = false;
+        sonido.close();
+    }
 }
 

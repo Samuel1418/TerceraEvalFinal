@@ -15,6 +15,8 @@ import excepciones.Excepcion;
 public class Panel extends javax.swing.JFrame {
     public static String usuario;
     String conectado="NO";
+    SonidoFondo music = new SonidoFondo();
+    String musica="SI";
     /**
      * Creates new form Panel
      */
@@ -25,8 +27,8 @@ public class Panel extends javax.swing.JFrame {
             jPanel2.add(Imagen);
             jPanel2.repaint();
             
-//        SonidoFondo obx = new SonidoFondo();
-//        obx.start();
+        
+        music.start();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +41,7 @@ public class Panel extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         Bienvenido = new javax.swing.JLabel();
@@ -54,6 +57,7 @@ public class Panel extends javax.swing.JFrame {
         CrearBuild = new javax.swing.JButton();
         ConsultarBuild = new javax.swing.JButton();
         ModificarBuild = new javax.swing.JButton();
+        Mute = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,6 +156,13 @@ public class Panel extends javax.swing.JFrame {
             }
         });
 
+        Mute.setText("Silenciar");
+        Mute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MuteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -159,32 +170,38 @@ public class Panel extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Revisar)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ConODescon))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Bienvenido)
-                                .addComponent(NombreUsuarioTexto)
-                                .addComponent(Pregunta))
-                            .addGap(87, 87, 87)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Guardar)
-                        .addGap(117, 117, 117)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CrearBuild)
-                            .addComponent(ConsultarBuild)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ConODescon))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Bienvenido)
+                                    .addComponent(NombreUsuarioTexto)
+                                    .addComponent(Pregunta))
+                                .addGap(87, 87, 87)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Mute))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Modificar)
-                            .addComponent(BorrarPartida))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BorrarBuild)
-                            .addComponent(ModificarBuild))))
+                            .addComponent(Revisar)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(Guardar)
+                                .addGap(117, 117, 117)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CrearBuild)
+                                    .addComponent(ConsultarBuild)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Modificar)
+                                    .addComponent(BorrarPartida))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BorrarBuild)
+                                    .addComponent(ModificarBuild))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -195,7 +212,8 @@ public class Panel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ConODescon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Mute))
                 .addGap(18, 18, 18)
                 .addComponent(Bienvenido)
                 .addGap(28, 28, 28)
@@ -323,6 +341,22 @@ public class Panel extends javax.swing.JFrame {
         obx.setVisible(true);
     }//GEN-LAST:event_ModificarBuildActionPerformed
 
+    private void MuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MuteActionPerformed
+       
+        if(musica=="SI"){
+            music.Mute();
+            musica="NO";
+            Mute.setText("Iniciar");
+           
+        }else if(musica=="NO"){
+            Mute.setText("Silenciar");
+            music = new SonidoFondo();
+            music.start();
+            musica="SI";
+            
+        }
+    }//GEN-LAST:event_MuteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -368,10 +402,12 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JButton Guardar;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton ModificarBuild;
+    private javax.swing.JButton Mute;
     private javax.swing.JTextField NombreUsuario;
     private javax.swing.JLabel NombreUsuarioTexto;
     private javax.swing.JLabel Pregunta;
     private javax.swing.JButton Revisar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
