@@ -5,10 +5,7 @@
  */
 package EntornoGraficoYBaseDeDatos;
 
-/**
- *
- * @author cromerofajar
- */
+
 public class CrearGuardar extends javax.swing.JFrame {
 
     /**

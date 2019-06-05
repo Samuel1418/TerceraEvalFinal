@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author cromerofajar
- */
 public class RevisarPartidas extends javax.swing.JFrame {
 
     /**
@@ -78,7 +74,7 @@ public class RevisarPartidas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre Partida", "Resultado", "Farmeo", "Kills", "Muertes", "Asistencias", "Rango", "Vision", "Elo"
+                "Nombre Partida", "Resultado", "Farmeo", "Kills", "Muertes", "Asistencias", "Vision", "Rango", "Elo"
             }
         ));
         jScrollPane2.setViewportView(TablaDatosParti);

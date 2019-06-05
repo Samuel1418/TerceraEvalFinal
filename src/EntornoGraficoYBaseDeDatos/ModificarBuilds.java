@@ -8,10 +8,6 @@ package EntornoGraficoYBaseDeDatos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author cromerofajar
- */
 public class ModificarBuilds extends javax.swing.JFrame {
 
     /**
@@ -48,7 +44,8 @@ public class ModificarBuilds extends javax.swing.JFrame {
         ModificarBuild = new javax.swing.JButton();
         BuscarBuild = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Nombre Build");
 
@@ -159,7 +156,7 @@ public class ModificarBuilds extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(NombreBuild, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +200,9 @@ public class ModificarBuilds extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,11 +257,11 @@ public class ModificarBuilds extends javax.swing.JFrame {
         NombreBuild.setText("");
         NombreBuild.setText(String.valueOf(base.get(0)[0]));
         Obj1.setText(String.valueOf(base.get(0)[1]));
-        Obj2.setText(String.valueOf(base.get(0)[1]));
-        Obj3.setText(String.valueOf(base.get(0)[2]));
-        Obj4.setText(String.valueOf(base.get(0)[3]));
-        Obj5.setText(String.valueOf(base.get(0)[4]));
-        Obj6.setText(String.valueOf(base.get(0)[5]));
+        Obj2.setText(String.valueOf(base.get(0)[2]));
+        Obj3.setText(String.valueOf(base.get(0)[3]));
+        Obj4.setText(String.valueOf(base.get(0)[4]));
+        Obj5.setText(String.valueOf(base.get(0)[5]));
+        Obj6.setText(String.valueOf(base.get(0)[6]));
     }//GEN-LAST:event_BuscarBuildActionPerformed
 
     /**

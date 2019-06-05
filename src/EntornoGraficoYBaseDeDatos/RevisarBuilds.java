@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author cromerofajar
- */
 public class RevisarBuilds extends javax.swing.JFrame {
 
     /**

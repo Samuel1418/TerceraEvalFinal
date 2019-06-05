@@ -8,10 +8,7 @@ package EntornoGraficoYBaseDeDatos;
 import javax.swing.JOptionPane;
 import Imagen.Imagen;
 import excepciones.Excepcion;
-/**
- *
- * @author cromerofajar
- */
+
 public class Panel extends javax.swing.JFrame {
     public static String usuario;
     String conectado="NO";

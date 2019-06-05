@@ -2,10 +2,7 @@ package utilidades;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author cromerofajar
- */
+
 public class PedirDatos {
     
     public static int entero(String mensaje){
@@ -17,12 +14,4 @@ public class PedirDatos {
     public static float decimalF(String mensaje){
         return Float.parseFloat(JOptionPane.showInputDialog(null,mensaje));
     }
-//    public static <T> T numeroPositivo(T numero){
-//         int valorador;
-//        if(){
-//            valorador=1;
-//        }
-//
-//        
-//    }
 }

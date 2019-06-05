@@ -8,10 +8,6 @@ package EntornoGraficoYBaseDeDatos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author cromerofajar
- */
 public class ModificarPartida extends javax.swing.JFrame {
 
     /**
@@ -288,13 +284,13 @@ public class ModificarPartida extends javax.swing.JFrame {
         NombrePartida.setText("");
         NombrePartida.setText(String.valueOf(base.get(0)[0]));
         Resultado.setText(String.valueOf(base.get(0)[1]));
-        Farmeo.setText(String.valueOf(base.get(0)[1]));
-        Kills.setText(String.valueOf(base.get(0)[2]));
-        Muertes.setText(String.valueOf(base.get(0)[3]));
-        Asistencias.setText(String.valueOf(base.get(0)[4]));
-        Vision.setText(String.valueOf(base.get(0)[5]));
-        Elo.setText(String.valueOf(base.get(0)[6]));
-        Rango.setText(String.valueOf(base.get(0)[7]));
+        Farmeo.setText(String.valueOf(base.get(0)[2]));
+        Kills.setText(String.valueOf(base.get(0)[3]));
+        Muertes.setText(String.valueOf(base.get(0)[4]));
+        Asistencias.setText(String.valueOf(base.get(0)[5]));
+        Vision.setText(String.valueOf(base.get(0)[7]));
+        Elo.setText(String.valueOf(base.get(0)[8]));
+        Rango.setText(String.valueOf(base.get(0)[6]));
     }//GEN-LAST:event_BuscarActionPerformed
 
     /**

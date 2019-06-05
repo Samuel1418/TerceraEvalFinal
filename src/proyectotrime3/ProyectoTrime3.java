@@ -7,10 +7,6 @@ package proyectotrime3;
 
 import EntornoGraficoYBaseDeDatos.Panel;
 
-/**
- *
- * @author cromerofajar
- */
 public class ProyectoTrime3 {
 
     /**

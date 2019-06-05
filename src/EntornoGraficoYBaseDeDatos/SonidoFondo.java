@@ -9,10 +9,6 @@ import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-/**
- *
- * @author cromerofajar
- */
 public class SonidoFondo extends Thread {
 
     Clip sonido;
@@ -22,7 +18,7 @@ public class SonidoFondo extends Thread {
         while (estado) {
             try {
                 sonido = AudioSystem.getClip();
-                File a = new File("/home/local/DANIELCASTELAO/cromerofajar/NetBeansProjects/proyectoTrime3/123.wav");//pc clase
+                File a = new File("C:\\Users\\Samuel\\Downloads\\123.wav");
                 sonido.open(AudioSystem.getAudioInputStream(a));
                 sonido.start();
                 Thread.sleep(51000); // (60segundos)

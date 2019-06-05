@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package EntornoGraficoYBaseDeDatos;
 
 import java.sql.Connection;
@@ -17,15 +13,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilidades.PedirDatos;
-/**
- *
- * @author cromerofajar
- */
+
 public class BaseDeDatos {
 
      public static class Inserts{
      public static void insert(String NombreUser, String NombrePartida,String Resultado,int Farmeo,int Kills,int Muertes,int Asistencias,int Vision,String Rango,int Elo) {
-        String sql = "INSERT INTO "+NombreUser+"(NombrePartida,NombreUser,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO "+NombreUser+"(NombrePartida,NombreUser,Resultado,Farmeo,Kills,Muertes,Asistencias,Vision,Rango,Elo) VALUES(?,?,?,?,?,?,?,?,?,?)";
         Connection conne = null;
         try {
             conne = DriverManager.getConnection("jdbc:sqlite:base.db");
@@ -146,7 +139,7 @@ public class BaseDeDatos {
             System.out.println(e.getMessage());
         }
 
-        String sql = "SELECT NombrePartida,Resultado,Farmeo,Kills,Muertes,Asistencias,Rango,Vision,Elo FROM \""+nombre+"\"";
+        String sql = "SELECT NombrePartida,Resultado,Farmeo,Kills,Muertes,Asistencias,Vision,Rango,Elo FROM \""+nombre+"\"";
 
         
         try (Connection conn=conne;
@@ -162,9 +155,9 @@ public class BaseDeDatos {
                 base[3]=rs.getString("Kills");
                 base[4]=rs.getString("Muertes");
                 base[5]=rs.getString("Asistencias");
-                base[6]=rs.getString("Rango");
-                base[7]=rs.getString("Vision");
-                base[8]=rs.getString("Elo");
+                base[6]=rs.getString("Vision");
+                base[7]=rs.getString("Rango");
+                base[8]=rs.getInt("Elo");
                 parti.add(base);
                 
             }
@@ -209,7 +202,7 @@ public class BaseDeDatos {
                 base[5]=rs.getString("Asistencias");
                 base[6]=rs.getString("Rango");
                 base[7]=rs.getString("Vision");
-                base[8]=rs.getString("Elo");
+                base[8]=rs.getInt("Elo");
                 parti.add(base);
                 
             }
@@ -252,8 +245,8 @@ public class BaseDeDatos {
                 base[3]=rs.getString("Kills");
                 base[4]=rs.getString("Muertes");
                 base[5]=rs.getString("Asistencias");
-                base[6]=rs.getString("Rango");
-                base[7]=rs.getString("Vision");
+                base[6]=rs.getString("Vision");
+                base[7]=rs.getString("Rango");
                 base[8]=rs.getString("Elo");
                 parti.add(base);
                 
@@ -297,8 +290,8 @@ public class BaseDeDatos {
                 base[3]=rs.getString("Kills");
                 base[4]=rs.getString("Muertes");
                 base[5]=rs.getString("Asistencias");
-                base[6]=rs.getString("Rango");
-                base[7]=rs.getString("Vision");
+                base[6]=rs.getString("Vision");
+                base[7]=rs.getString("Rango");
                 base[8]=rs.getString("Elo");
                 parti.add(base);
                 
